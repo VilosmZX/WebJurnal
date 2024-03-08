@@ -11,6 +11,11 @@ import {
 import LoginPage from "./pages/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
+import AdminPage from "./pages/AdminPage.jsx";
+import AdminRoutes from "./routes/AdminRoutes.jsx";
+import Users from "./components/AdminPanel/Users.jsx";
+import Banners from "./components/AdminPanel/Banners.jsx";
+import Posts from "./components/AdminPanel/Posts.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +33,30 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <RegisterPage />,
+      },
+      {
+        element: <AdminRoutes />,
+        children: [
+          {
+            path: '/admin',
+            element: <AdminPage />,
+            children: [
+              {
+                path: 'users',
+                element: <Users />
+              },
+              {
+                path: 'banners',
+                element: <Banners />
+              },
+              {
+                path: 'posts',
+                element: <Posts />
+              },
+              
+            ]
+          }
+        ]
       },
       { path: "*", element: <Navigate to="/" replace /> },
     ],

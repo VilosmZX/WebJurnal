@@ -8,6 +8,7 @@ export const UserContext = createContext({});
 const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     refreshToken();
@@ -22,7 +23,7 @@ const UserContextProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      const response = await axios.delete("http://localhost:5000/logout");
+      await axios.delete("http://localhost:5000/logout");
       return navigate(0);
     } catch (error) {
       console.log(error);
@@ -35,7 +36,16 @@ const UserContextProvider = ({ children }) => {
       const decoded_data = jwtDecode(response.data.accessToken);
       setUser(decoded_data);
     } catch (error) {
-      console.log(error);
+      setUser({});
+    }
+  };
+
+  const getToken = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/token");
+      return response.data.accessToken;
+    } catch (error) {
+      setUser({})
     }
   };
 
@@ -43,9 +53,12 @@ const UserContextProvider = ({ children }) => {
     user,
     setUser,
     logout,
+    getToken
   };
 
-  return <UserContext.Provider value={data}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={data}>{user && children}</UserContext.Provider>
+  );
 };
 
 export default UserContextProvider;

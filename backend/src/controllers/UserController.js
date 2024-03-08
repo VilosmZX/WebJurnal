@@ -7,7 +7,7 @@ export const getUsers = async (req, res) => {
   try {
     const users = await Users.findAll({
       attributes: {
-        exclude: ["password", "refreshToken"],
+        exclude: ["password", "refreshToken", "id"],
       },
     });
     res.json(users);
@@ -19,6 +19,18 @@ export const getUsers = async (req, res) => {
 export const registerUser = async (req, res) => {
   const { firstName, lastName, username, email, password, confirmPassword } =
     req.body;
+
+  const user = await Users.findOne({
+    where: {
+      email,
+    },
+  });
+
+  if (user)
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ msg: "Email sudah terdaftar" });
+
   if (password != confirmPassword)
     return res
       .status(StatusCodes.BAD_REQUEST)
@@ -115,6 +127,8 @@ export const refreshToken = async (req, res) => {
         username: user.username,
         email: user.email,
         password: user.password,
+        isAdmin: user.isAdmin,
+        photo_profile: user.photo_profile,
       };
       const accessToken = jwt.sign(data, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "15s",

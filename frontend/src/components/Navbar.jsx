@@ -40,10 +40,10 @@ const Navbar = () => {
                 </div>
                 <div className="flex h-full p-2 justify-between items-center flex-col">
                   <div className="font-light flex flex-col gap-2">
-                    {user ? (
+                    {user?.username ? (
                       <span className="font-bold text-center text-yellow-500">
                         <span className="text-white">Halo,</span>{" "}
-                        {!user.isAdmin && "Admin"} {user.username}
+                        {user.isAdmin && "Admin"} {user.username}
                       </span>
                     ) : (
                       <span className="font-bold text-center text-yellow-500">
@@ -52,7 +52,7 @@ const Navbar = () => {
                     )}
                   </div>
                   <div className="transition-all duration-300 flex justify-center items-center gap-3">
-                    {user ? (
+                    {user?.username ? (
                       <>
                         <IoSettings className="cursor-pointer" />
 

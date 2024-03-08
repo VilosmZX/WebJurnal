@@ -9,7 +9,7 @@ import UserContextProvider, { UserContext } from "./context/UserContext.jsx";
 
 function App() {
   return (
-    <div className="tracking-wide bg-gray-900 w-screen h-screen">
+    <div className="tracking-wide bg-gray-900 h-[115vh]">
       <UserContextProvider>
         <NotificationContextProvider>
           <Navbar />

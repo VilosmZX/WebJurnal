@@ -2,7 +2,10 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import db from "./config/Database.js";
+
 import Users from "./models/UserModel.js";
+import Banners from "./models/BannerModel.js";
+
 import UserRouter from "./routers/UserRouter.js";
 import dotenv from "dotenv";
 
@@ -14,6 +17,7 @@ const app = express();
   try {
     await db.authenticate();
     await Users.sync();
+    await Banners.sync();
 
     console.log("Database connected successfuly!");
 

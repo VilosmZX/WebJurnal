@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import NotificationContext from "../context/NotificationContext";
 
 const RegisterPage = () => {
+  const {setQueueNotifications} = useContext(NotificationContext);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  
   const navigate = useNavigate();
 
   const register = async (e) => {
@@ -24,16 +25,19 @@ const RegisterPage = () => {
         password,
         confirmPassword,
       });
-      return navigate("/login", { replace: true });
+      setQueueNotifications(['Registrasi berhasil, ke menu login dalam 3 detik']);
+      return setTimeout(() => {
+        navigate('/login', {replace: true})
+      }, 3000);
     } catch (error) {
       if (error.response) {
-        console.log(error.response.data);
+        setQueueNotifications([error.response.data.msg]);
       }
     }
   };
 
   return (
-    <div className="flex flex-col gap-12 mt-8 justify-start p-10 items-center h-[88%] ">
+    <div className="flex flex-col gap-8 mt-2 justify-start p-10 items-center h-[88%] ">
       <h1 className="font-extrabold font-poppins text-4xl bg-clip-text bg-gradient-to-r text-transparent from-pink-600 to-purple-800 uppercase">
         Registrasi
       </h1>

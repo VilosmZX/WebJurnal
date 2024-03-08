@@ -1,6 +1,10 @@
 import React from "react";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 const Carousel = () => {
+  const { user } = useContext(UserContext);
+
   return (
     <div className="flex justify-center">
       <div className="h-[22rem] bg-slate-900 w-full rounded-lg drop-shadow-2xl">
