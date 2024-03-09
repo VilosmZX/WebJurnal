@@ -41,7 +41,7 @@ const RegisterPage = () => {
       <h1 className="font-extrabold font-poppins text-4xl bg-clip-text bg-gradient-to-r text-transparent from-pink-600 to-purple-800 uppercase">
         Registrasi
       </h1>
-      <div className="bg-gradient-to-r relative from-pink-700 to-purple-950 w-96 drop-shadow-2xl rounded-lg p-1 h-[40rem]">
+      <div className="bg-gradient-to-r relative from-pink-700 to-purple-950 w-96 drop-shadow-2xl rounded-lg p-1 h-[47rem]">
         <form
           aria-required={true}
           onSubmit={register}

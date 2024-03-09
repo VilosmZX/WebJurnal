@@ -155,3 +155,20 @@ export const logout = async (req, res) => {
   res.clearCookie("refreshToken");
   res.sendStatus(StatusCodes.OK);
 };
+
+export const changePhotoProfile = async (req, res) => {
+  const id = req.query.id;
+  const { data } = req.body;
+  try {
+    await Users.update({
+      photo_profile: data  
+    }, {
+      where: {
+        id
+      }
+    })
+    res.status(StatusCodes.ACCEPTED).json({msg: 'Photo Profile Berhasil di update'});
+  } catch (error) {
+    res.status(StatusCodes.BAD_REQUEST).json({msg: 'Terjadi kesalahan'});
+  }
+}

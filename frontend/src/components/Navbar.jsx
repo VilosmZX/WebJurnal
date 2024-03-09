@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { IoSettings, IoDiamond } from "react-icons/io5";
 import GradientBar from "./GradientBar";
 import NavbarItem from "./NavbarItem";
@@ -25,10 +25,7 @@ const Navbar = () => {
               <img
                 onClick={() => setUserMenuOpen(!userMenuOpen)}
                 className="size-8 cursor-pointer object-fill bg-gradient-to-r from-pink-500 to-purple-900 rounded-full"
-                src={`${
-                  !user?.photo_profile &&
-                  "https://firebasestorage.googleapis.com/v0/b/webjurnal-cafe5.appspot.com/o/%E2%80%94Pngtree%E2%80%94avatar%20icon%20profile%20icon%20member_5247852.png?alt=media&token=9c9d6fb1-e64b-47b1-aed3-0bd013a487bf"
-                }`}
+                src={user?.photo_profile}
               />
               <div
                 className={`${
@@ -54,8 +51,9 @@ const Navbar = () => {
                   <div className="transition-all duration-300 flex justify-center items-center gap-3">
                     {user?.username ? (
                       <>
-                        <IoSettings className="cursor-pointer" />
-
+                        <Link to={'/settings'} onClick={() => setUserMenuOpen(!userMenuOpen)} className="cursor-pointer">
+                          <IoSettings />
+                        </Link>
                         <span
                           onClick={logout}
                           className="cursor-pointer font-bold bg-gradient-to-r from-red-600 to-purple-900 p-2 pt-0.5 pb-0.5 text-center rounded-full"

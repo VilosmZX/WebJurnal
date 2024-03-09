@@ -27,7 +27,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex flex-col gap-12 mt-8 justify-start p-10 items-center h-[88%] ">
+    <div className="flex flex-col gap-12 mt-8 justify-start p-10 items-center ">
       <h1 className="font-extrabold font-poppins text-4xl bg-clip-text bg-gradient-to-r text-transparent from-pink-600 to-purple-800 uppercase">
         Login
       </h1>
