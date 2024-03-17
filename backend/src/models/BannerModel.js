@@ -11,7 +11,7 @@ const Banners = db.define(
       defaultValue: DataTypes.UUIDV4,
     },
     image: {
-        type: DataTypes.BLOB('long')
+        type: DataTypes.STRING,
     }
   },
   {
