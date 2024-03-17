@@ -1,16 +1,26 @@
-import React from "react";
-import { useContext } from "react";
-import { UserContext } from "../context/UserContext";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 
 const Carousel = () => {
-  const { user } = useContext(UserContext);
+  const [banner, setBanner] = useState('');
+
+  useEffect(() => {
+    getBanner();
+  })
+
+  const getBanner = async () => {
+    const response = await axios.get('http://localhost:5000/current-banner');
+    setBanner(response.data.image);
+  }
 
   return (
     <div className="flex justify-center">
       <div className="h-[22rem] bg-slate-900 w-full rounded-lg drop-shadow-2xl">
         <img
+          loading="lazy"
           className="object-cover h-full w-full"
-          src="https://media1.tenor.com/m/cHXf2CRshxAAAAAC/new-year.gif"
+          src={banner}
         />
       </div>
     </div>

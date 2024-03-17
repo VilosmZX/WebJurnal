@@ -11,7 +11,7 @@ const NavbarItem = ({ name, path }) => {
         {name}
       </NavLink>
       <div
-        className={`bg-white h-1 bg-gradient-to-r from-yellow-500 to-purple-900`}
+        className={`bg-white h-1 bg-gradient-to-r from-blue-600 to-blue-400`}
       ></div>
     </div>
   );

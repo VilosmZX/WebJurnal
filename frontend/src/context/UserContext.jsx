@@ -36,7 +36,10 @@ const UserContextProvider = ({ children }) => {
       const decoded_data = jwtDecode(response.data.accessToken);
       if (!decoded_data.photo_profile) {
         decoded_data.photo_profile = "https://firebasestorage.googleapis.com/v0/b/webjurnal-cafe5.appspot.com/o/%E2%80%94Pngtree%E2%80%94avatar%20icon%20profile%20icon%20member_5247852.png?alt=media&token=9c9d6fb1-e64b-47b1-aed3-0bd013a487bf"
+      } else {
+        
       }
+      console.log('KONTOL');
       setUser(decoded_data);
     } catch (error) {
       setUser({});
@@ -51,9 +54,7 @@ const UserContextProvider = ({ children }) => {
       setUser({})
     }
   };
-
   
-
   const data = {
     user,
     setUser,

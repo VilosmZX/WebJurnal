@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { IoSettings, IoDiamond } from "react-icons/io5";
+import { IoSettings, IoHammer } from "react-icons/io5";
 import GradientBar from "./GradientBar";
 import NavbarItem from "./NavbarItem";
 import { UserContext } from "../context/UserContext";
@@ -16,7 +16,7 @@ const Navbar = () => {
         <div className="flex flex-row justify-between items-center w-full">
           <NavLink
             to={"/"}
-            className="tracking-wider font-extrabold rounded-md bg-none p-2 flex justify-center items-center text-pink-600 hover:text-white hover:bg-purple-950 duration-300"
+            className="tracking-wider font-extrabold rounded-md p-2 flex justify-center items-center from-blue-600 to-blue-400 text-transparent bg-clip-text bg-gradient-to-r ease-in-out duration-300"
           >
             JURNALISTIKTCR
           </NavLink>
@@ -51,6 +51,11 @@ const Navbar = () => {
                   <div className="transition-all duration-300 flex justify-center items-center gap-3">
                     {user?.username ? (
                       <>
+                        {user?.isAdmin && (
+                          <Link to={'/admin'} onClick={() => setUserMenuOpen(!userMenuOpen)} className="cursor-pointer">
+                            <IoHammer />
+                          </Link>
+                        )}
                         <Link to={'/settings'} onClick={() => setUserMenuOpen(!userMenuOpen)} className="cursor-pointer">
                           <IoSettings />
                         </Link>

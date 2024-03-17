@@ -8,9 +8,9 @@ const AdminPage = () => {
   const activeNavbar = "underline transition-all duration-300 ease-in-out";
 
   return (
-    <div className="text-white m-5">
-      <div className="flex gap-2 shadow-l h-[85vh]">
-        <div className="bg-purple-900 p-1.5 w-[20%]">
+    <div className="text-white m-5 mt-10">
+      <div className="flex gap-2 h-[80vh]">
+        <div className="bg-gradient-to-br from-blue-600 to-blue-400 shadow-2xl rounded-lg p-1.5 w-[20%]">
           <div className="flex flex-col gap-5">
             <NavLink
               className={({ isActive }) => (isActive ? activeNavbar : "")}

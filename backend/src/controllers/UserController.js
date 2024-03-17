@@ -2,6 +2,8 @@ import Users from "../models/UserModel.js";
 import bcrypt from "bcrypt";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
+import { storage } from "../config/Firebase.js";
+import { ref } from 'firebase/storage';
 
 export const getUsers = async (req, res) => {
   try {
@@ -116,7 +118,6 @@ export const refreshToken = async (req, res) => {
         refresh_token: refreshToken,
       },
     });
-    console.log(user);
     if (!user) return res.sendStatus(StatusCodes.FORBIDDEN);
     jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, _) => {
       if (err) return res.sendStatus(StatusCodes.FORBIDDEN);
@@ -156,19 +157,7 @@ export const logout = async (req, res) => {
   res.sendStatus(StatusCodes.OK);
 };
 
-export const changePhotoProfile = async (req, res) => {
-  const id = req.query.id;
-  const { data } = req.body;
-  try {
-    await Users.update({
-      photo_profile: data  
-    }, {
-      where: {
-        id
-      }
-    })
-    res.status(StatusCodes.ACCEPTED).json({msg: 'Photo Profile Berhasil di update'});
-  } catch (error) {
-    res.status(StatusCodes.BAD_REQUEST).json({msg: 'Terjadi kesalahan'});
-  }
+export const updateUser = async (req, res) => {
+  console.log(req.body);
+  console.log(req.files);
 }

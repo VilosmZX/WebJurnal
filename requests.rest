@@ -1,0 +1,2 @@
+### New
+POST http://localhost:5000/banners

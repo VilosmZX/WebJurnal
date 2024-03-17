@@ -2,31 +2,25 @@ import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../context/UserContext'
 import NotificationContext from '../context/NotificationContext';
 import axios from 'axios';
+import { Buffer } from 'buffer';
+import { Helmet } from 'react-helmet';
 
 const SettingsPage = () => {
   const {user, getToken} = useContext(UserContext);
-  const { setQueueNotifications } = useContext(NotificationContext);
-  const [photoProfile, setPhotoProfile] = useState('');
+  const {setQueueNotifications } = useContext(NotificationContext);
 
-  useEffect(() => {
-    setPhotoProfile(user.photo_profile);
-  }, [])
-
-  const changePhotoProfile = async (e) => {
-    console.log(e.target.files[0])
-    setPhotoProfile(URL.createObjectURL(e.target.files[0]));
-    await updatePhotoProfile(photoProfile);
-  }
-
-  const updatePhotoProfile = async (data) => {
+  
+  const update = async (e) => {
+    console.log(image);
+    e.preventDefault();
     try {
       const token = await getToken();
-      const response = await axios.patch(`http://localhost:5000/users?id=${user.id}`, {
+      const response = await axios.post(`http://localhost:5000/users/update?id=${user.id}`, {
         data
       }, {
         headers: {
           Authorization: `Bearer ${token}`
-        }
+        },
       })
       console.log(response.status);
     } catch (error) {
@@ -37,10 +31,19 @@ const SettingsPage = () => {
   }
 
   return (
-    <div>
-      <img className='size-20' src={photoProfile} />
-      <input onChange={changePhotoProfile} type='file'/> 
-    </div>
+    <>
+      <Helmet>
+        <title>{user.firstName}'s Settings</title>
+      </Helmet>
+      <div>
+        <form onSubmit={update}>
+            <img className='size-20' src={photoProfile} />
+            <input onChange={changePhotoProfile} name='photoProfile' type='file'/> 
+            <input onChange={e => setUsername(e.target.value)} name='username' value={username}/>
+            <button onClick={update}>Update</button>
+        </form>
+      </div>
+    </>
   )
 }
 

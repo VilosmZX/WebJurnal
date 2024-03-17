@@ -11,7 +11,7 @@ const Users = db.define(
       defaultValue: DataTypes.UUIDV4,
     },
     photo_profile: {
-      type: DataTypes.BLOB("long"),
+      type: DataTypes.STRING,
       allowNull: true,
     },
     email: {
