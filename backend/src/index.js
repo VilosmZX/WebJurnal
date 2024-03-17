@@ -8,6 +8,8 @@ import Banners from "./models/BannerModel.js";
 
 import UserRouter from "./routers/UserRouter.js";
 import dotenv from "dotenv";
+import bodyParser from "body-parser";
+import BannerRouter from './routers/BannerRouter.js';
 
 dotenv.config();
 
@@ -23,19 +25,19 @@ const app = express();
 
     // Jika database berhasi l terhubung
     app.use(cookieParser());
-    app.use(express.json());
+    app.use(express.json({limit: '50mb'}));
+    app.use(express.urlencoded({extended: true}));
     app.use(
       cors({
         credentials: true,
-        origin: [
-          "http://localhost:5173",
-          "http://139.193.100.182:5173"
-        ],
+        origin: 'http://localhost:5173',
+        preflightContinue: true
       })
     );
 
     // Routers
     app.use(UserRouter);
+    app.use(BannerRouter);
 
     app.listen(5000, () => console.log("Server is online!"));
   } catch (error) {
