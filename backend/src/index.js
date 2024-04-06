@@ -10,6 +10,8 @@ import UserRouter from "./routers/UserRouter.js";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import BannerRouter from './routers/BannerRouter.js';
+import Posts from "./models/PostModel.js";
+import Comments from "./models/CommentModel.js";
 
 dotenv.config();
 
@@ -18,6 +20,8 @@ const app = express();
 (async () => {
   try {
     await db.authenticate();
+    await Comments.sync();
+    await Posts.sync();
     await Users.sync();
     await Banners.sync();
 

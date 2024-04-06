@@ -1,5 +1,7 @@
 import db from "../config/Database.js";
 import { DataTypes } from "sequelize";
+import Posts from "./PostModel.js";
+import Comments from "./CommentModel.js";
 
 const Users = db.define(
   "users",
@@ -43,5 +45,14 @@ const Users = db.define(
     freezeTableName: true,
   }
 );
+Users.hasMany(Posts, {as: 'posts'});
+Posts.belongsTo(Users, {
+  foreignKey: 'userId',
+  as: 'user'
+})
+Comments.belongsTo(Users, {
+  foreignKey: 'userId',
+  as: 'user'
+})
 
 export default Users;

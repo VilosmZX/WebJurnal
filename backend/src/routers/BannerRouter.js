@@ -6,45 +6,14 @@ import { StatusCodes } from "http-status-codes";
 import { storage } from '../config/Firebase.js';
 import { ref, uploadString, getDownloadURL, listAll } from "firebase/storage";
 import { v4 } from 'uuid'
+import { getBanners, getCurrentBanner, addBanner } from "../controllers/BannerController.js";
 
 const router = Router();
 
-router.post('/banners', verifyToken, isAdmin, async (req, res) => {
-    const currentBanner = (await Banners.findAll())[0];
-    const imageRef = ref(storage, `banners/${v4()}`);
-    if (!req.body.url) {
-        await uploadString(imageRef, req.body.image.split(',')[1], 'base64', {
-            contentType: req.body.image.substring(
-                req.body.image.indexOf(":") + 1, 
-                req.body.image.lastIndexOf(";")
-            )
-        });
-        const url = await getDownloadURL(imageRef)
-        await currentBanner.update({
-            image: url
-        })
-        res.status(StatusCodes.CREATED).json(url);
-    } else {
-        await currentBanner.update({
-            image: req.body.url
-        })
-        res.sendStatus(StatusCodes.CREATED);
-    }
-})
+router.post('/banners', verifyToken, isAdmin, getBanners)
 
-router.get('/current-banner', async (req, res) => {
-    const banners = await Banners.findOne();
-    res.status(StatusCodes.OK).json({image: banners.image});
-})
+router.get('/current-banner', getCurrentBanner)
 
-router.get('/banners', verifyToken, isAdmin, async (req, res) => {
-    const imageRef = ref(storage, 'banners');
-    const response = await listAll(imageRef);
-    let data = [];
-    for(let i = 0; i < response.items.length; i++) {
-        data.push(await getDownloadURL(response.items[i]));
-    }       
-    res.status(StatusCodes.OK).json(data);
-});
+router.get('/banners', verifyToken, isAdmin, addBanner);
 
 export default router;
