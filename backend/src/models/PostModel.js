@@ -17,9 +17,10 @@ const Posts = db.define(
         title: {
             type: DataTypes.TEXT
         },
-
+        content: {
+            type: DataTypes.TEXT
+        }
     }
 )
-Posts.hasMany(Comments, {as: 'comments'})
 
 export default Posts;

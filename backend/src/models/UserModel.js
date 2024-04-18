@@ -50,9 +50,5 @@ Posts.belongsTo(Users, {
   foreignKey: 'userId',
   as: 'user'
 })
-Comments.belongsTo(Users, {
-  foreignKey: 'userId',
-  as: 'user'
-})
 
 export default Users;

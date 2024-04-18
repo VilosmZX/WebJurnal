@@ -18,6 +18,7 @@ import Banners from "./components/AdminPanel/Banners.jsx";
 import Posts from "./components/AdminPanel/Posts.jsx";
 import AuthenticatedRoutes from "./routes/AuthenticatedRoutes.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
+import PostPage from "./pages/PostPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
               },
               
             ]
+          },
+          {
+            path: '/post',
+            element: <PostPage />
           }
         ]
       },

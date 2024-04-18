@@ -12,6 +12,7 @@ import bodyParser from "body-parser";
 import BannerRouter from './routers/BannerRouter.js';
 import Posts from "./models/PostModel.js";
 import Comments from "./models/CommentModel.js";
+import PostRouter from './routers/PostRouter.js'
 
 dotenv.config();
 
@@ -20,9 +21,8 @@ const app = express();
 (async () => {
   try {
     await db.authenticate();
-    await Comments.sync();
-    await Posts.sync();
     await Users.sync();
+    await Posts.sync();
     await Banners.sync();
 
     console.log("Database connected successfuly!");
@@ -42,6 +42,7 @@ const app = express();
     // Routers
     app.use(UserRouter);
     app.use(BannerRouter);
+    app.use(PostRouter);
 
     app.listen(5000, () => console.log("Server is online!"));
   } catch (error) {

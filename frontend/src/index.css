@@ -29,3 +29,7 @@ html, body {
     scrollbar-width: none; /* Firefox */
   }
 }
+
+#particles canvas {
+  z-index: -99999999999;
+}

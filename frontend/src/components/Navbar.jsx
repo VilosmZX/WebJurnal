@@ -22,11 +22,12 @@ const Navbar = () => {
           </NavLink>
           <div className="flex justify-center items-center gap-2">
             <div>
-              <img
-                onClick={() => setUserMenuOpen(!userMenuOpen)}
-                className="size-8 cursor-pointer object-fill bg-gradient-to-r from-pink-500 to-purple-900 rounded-full"
-                src={user?.photo_profile}
-              />
+              <span 
+              className="select-none cursor-pointer duration-300 hover:opacity-80 bg-slate-900 p-2 px-10 rounded-full font-medium" 
+              onClick={() => setUserMenuOpen(!userMenuOpen)}
+              >
+                {user?.username}
+              </span>
               <div
                 className={`${
                   !userMenuOpen ? "opacity-0" : "opacity-100"

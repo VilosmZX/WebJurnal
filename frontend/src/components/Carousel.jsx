@@ -16,10 +16,10 @@ const Carousel = () => {
 
   return (
     <div className="flex justify-center">
-      <div className="h-[22rem] bg-slate-900 w-full rounded-lg drop-shadow-2xl">
+      <div className="md:h-[20rem] w-full rounded-lg shadow-2xl drop-shadow-2xl">
         <img
           loading="lazy"
-          className="object-cover h-full w-full"
+          className="object-cover h-full w-full opacity-90 rounded-lg"
           src={banner}
         />
       </div>
